@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Count, F
 from django.views.generic import TemplateView
-from .models import Account, Liability
+from .models import Account, Expense
 from .forms import Expense, ExpenseForm
 from django.views.generic.edit import FormView
 from django.views.generic import ListView
@@ -32,8 +32,22 @@ def register(request):
 
     return render(request, 'registration/register.html', {"form": form})  
 
+
+def generate_graph(data):
+    fig = px.bar(data, x='months', y='expenses', title='Monthly Expenses')
+    fig.update_layout(
+        xaxis=dict(rangeslider=dict(visible=True)),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font_color='rgba(0,0,0,1)'
+    )
+    fig.update_traces(marker_color='#008c41')
+
+    graph_json=fig.to_json()
+    return graph_json
+
 class ExpensesListView(FormView):
-    template_name = 'expenses/expenses_list.html'  
+    template_name = 'exp_tracker/expenses_list.html'  
     form_class = ExpenseForm
     success_url = '/' 
 
@@ -127,7 +141,13 @@ class ExpensesListView(FormView):
 
         # Prepare graph_data for generating the Plotly graph
 
+        graph_data = {
+            'months': [item['year_month'] for item in aggregated_data],
+            'expenses': [item['expenses'] for item in aggregated_data]
+        }
 
+        graph_data['chart'] = generate_graph(graph_data)
+        context['graph_data'] = mark_safe(graph_data['chart'])
 
-
+        return context
 
