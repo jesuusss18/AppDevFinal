@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from my_app import models
@@ -11,6 +13,7 @@ from .models import Account, Liability
 from .forms import LiabilityForm
 from django.views.generic.edit import FormView
 from django.views.generic import ListView
+from django.utils.safestring import mark_safe
 from django.utils.safestring import mark_safe
 from datetime import datetime
 from dateutil.relativedelta import relativedelta

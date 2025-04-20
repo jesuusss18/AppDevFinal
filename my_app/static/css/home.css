@@ -1,0 +1,76 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 40px 20px;
+    text-align: center;
+    color: #333;
+    animation: fadeInBody 1s ease-in-out;
+}
+
+h2 {
+    color: #008c41;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+h2:hover {
+    transform: scale(1.05);
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    background-color: #008c41;
+    padding: 10px 20px;
+    border-radius: 6px;
+    transition: background-color 0.3s, transform 0.3s;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+a:hover {
+    background-color: #006b33;
+    transform: translateY(-3px);
+}
+
+.home {
+    animation: fadeIn 1s ease-in-out;
+    padding: 20px;
+}
+
+.reg, .log {
+    margin: 15px auto;
+    animation: slideUp 0.8s ease forwards;
+}
+
+@keyframes fadeInBody {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
