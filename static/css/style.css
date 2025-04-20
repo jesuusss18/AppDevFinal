@@ -1,0 +1,53 @@
+/* Long-Term Fields */
+#end_date,
+#interest_rate {
+  display: none;
+}
+
+/* Form Fields Styling */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Add extra padding for form group containers */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Error Message Styling */
+p {
+  color: #e74c3c;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Chart Section */
+.plotly-chart {
+  width: 100%;
+  height: 400px;
+  margin-bottom: 30px;
+}
+
+/* Responsive Adjustments for Forms */
+@media (max-width: 768px) {
+  .form-container {
+    width: 100%;
+    padding: 15px;
+  }
+}

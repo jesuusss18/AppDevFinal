@@ -1,0 +1,84 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Main Container */
+div {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Welcome Section */
+h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Authenticated User Section */
+h2.welcome-user {
+    color: #4CAF50;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Home Section (for non-authenticated users) */
+.home {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Registration and Login Section */
+.reg, .log {
+    margin-top: 20px;
+}
+
+.reg a, .log a {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    text-align: center;
+    width: 200px;
+}
+
+.reg a:hover, .log a:hover {
+    background-color: #0056b3;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .home {
+        margin-top: 30px;
+    }
+    
+    .reg a, .log a {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
