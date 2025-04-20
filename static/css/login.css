@@ -1,11 +1,9 @@
-/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
@@ -13,7 +11,6 @@ body {
     padding: 50px 20px;
 }
 
-/* Error Message */
 p {
     color: #e74c3c;
     font-size: 1rem;
@@ -21,7 +18,6 @@ p {
     margin-bottom: 20px;
 }
 
-/* Container for the form */
 .container {
     display: flex;
     justify-content: center;
@@ -29,7 +25,6 @@ p {
     height: 100vh;
 }
 
-/* Form container */
 .form-container {
     background-color: white;
     border-radius: 8px;
@@ -39,14 +34,12 @@ p {
     max-width: 400px;
 }
 
-/* Form styling */
 .form {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* Form fields */
 input[type="text"],
 input[type="password"] {
     padding: 10px;
@@ -63,13 +56,11 @@ input[type="password"]:focus {
     border-color: #007bff;
 }
 
-/* Button container */
 .button-container {
     display: flex;
     justify-content: center;
 }
 
-/* Submit Button */
 button {
     padding: 12px 20px;
     background-color: #007bff;
@@ -85,16 +76,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Header styling */
 h2 {
     color: #333;
     margin-bottom: 20px;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .form-container {
-        padding: 30px;
-        width: 100%;
-    }
 }
