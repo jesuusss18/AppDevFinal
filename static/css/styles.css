@@ -1,11 +1,9 @@
-/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
   
-  /* Body Styling */
   body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
@@ -13,7 +11,6 @@
     padding: 40px;
   }
   
-  /* Main Wrapper */
   .main {
     display: flex;
     flex-direction: column;
@@ -21,19 +18,16 @@
     margin-top: 20px;
   }
   
-  /* Logo Styling */
   .img img {
     max-width: 200px;
     margin-bottom: 30px;
   }
   
-  /* Bar Chart Section */
   .bar-chart {
     text-align: center;
     margin-bottom: 40px;
   }
   
-  /* Monthly Expenses List */
   .expenses {
     display: flex;
     flex-direction: column;
@@ -65,7 +59,6 @@
     color: #777;
   }
   
-  /* Button Styling */
   button {
     padding: 12px 25px;
     background-color: #28a745;
@@ -80,7 +73,6 @@
     background-color: #218838;
   }
   
-  /* Expense Form Styling */
   .form-group {
     margin-bottom: 15px;
   }
@@ -99,25 +91,9 @@
     margin-bottom: 10px;
   }
   
-  /* Lower Section */
   .lower {
     margin-top: 40px;
     width: 100%;
     max-width: 800px;
-  }
-  
-  /* Mobile Responsiveness */
-  @media (max-width: 768px) {
-    .main {
-      padding: 20px;
-    }
-  
-    .form-group {
-      margin-bottom: 10px;
-    }
-  
-    .lower {
-      width: 100%;
-    }
   }
   
