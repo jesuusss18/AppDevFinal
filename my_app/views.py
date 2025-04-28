@@ -12,12 +12,13 @@ from django.views.generic.edit import FormView
 from .models import Account, Liability
 from .forms import LiabilityForm
 from .utils import generate_graph
+import plotly.express as px
 
-
+# Render the home page
 def home(request):
     return render(request, 'home/home.html')
 
-
+# Register new user and log them in
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -29,18 +30,16 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
-
+# Handle expense form and display list of liabilities
 class ExpenseListView(FormView):
     template_name = 'expenses/expense_list.html'
     form_class = LiabilityForm
     success_url = '/'
 
+    # Save liability and return updated data as JSON if Ajax request
     def form_valid(self, form):
-        # Get or create account
         account, _ = Account.objects.get_or_create(user=self.request.user)
-        print(f"Account found or created: {account}")
 
-        # Create new liability from form data
         liability = Liability(
             name=form.cleaned_data['name'],
             amount=form.cleaned_data['amount'],
@@ -51,17 +50,12 @@ class ExpenseListView(FormView):
             user=self.request.user
         )
         liability.save()
-        print(f"Liability saved: {liability}")
 
-        # Add liability to account
         account.liability_list.add(liability)
-        print(f"Liability added to account: {account}")
 
-        # Handle AJAX request
         if self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            # Render the liability HTML directly instead of using an external file
             liability_html = f"""
-            <div class="expense-item">
+            <div class="expense-item" id="expense-{liability.id}">
                 <h4>{liability.name}</h4>
                 <p>Amount: {liability.amount}</p>
                 <p>Monthly Expense: {liability.monthly_expense}</p>
@@ -79,6 +73,7 @@ class ExpenseListView(FormView):
 
         return super().form_valid(form)
 
+    # Get graph data to visualize expenses
     def get_graph_data(self):
         aggregated_data = self.aggregate_expenses()
         graph_data = {
@@ -88,6 +83,7 @@ class ExpenseListView(FormView):
         graph_data['chart'] = generate_graph(graph_data)
         return graph_data
 
+    # Aggregate expenses by month
     def aggregate_expenses(self):
         expense_data_graph = {}
         for account in Account.objects.filter(user=self.request.user):
@@ -107,12 +103,14 @@ class ExpenseListView(FormView):
 
         return aggregated_data
 
+    # Add expenses and graph data to the context
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['expense_data'] = self.get_expenses_data()
         context['graph_data'] = self.get_graph_data()['chart']
         return context
 
+    # Get expense data grouped by month
     def get_expenses_data(self):
         expense_data = {}
         for account in Account.objects.filter(user=self.request.user):
@@ -127,3 +125,4 @@ class ExpenseListView(FormView):
                     'date': liability.date,
                 })
         return expense_data
+
