@@ -1,99 +1,167 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 20px;
+}
+
+.img img {
+  max-width: 200px;
+  margin-bottom: 30px;
+}
+
+.bar-chart {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.expenses {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.expense-item {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.expense-item h4 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.expense-item p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.expense-item p strong {
+  color: #007bff;
+}
+
+.expense-item .date-info {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 5px;
+}
+
+.expense-item .amount-info {
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.month {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.incomee {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.idhar h2,
+.udhar h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.date {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+button {
+  padding: 12px 25px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.lower {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 800px;
+}
+
+@media (max-width: 768px) {
   body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    padding: 40px;
+    padding: 20px;
   }
-  
+
   .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .img img {
-    max-width: 200px;
-    margin-bottom: 30px;
-  }
-  
-  .bar-chart {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  .expenses {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 800px;
-  }
-  
-  .month {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .incomee {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .idhar h2,
-  .udhar h2 {
-    margin: 0;
-  }
-  
-  .date {
-    font-size: 0.9rem;
-    color: #777;
-  }
-  
-  button {
-    padding: 12px 25px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #218838;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group input,
-  .form-group select {
-    width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
   }
-  
-  h2 {
-    color: #333;
-    margin-bottom: 10px;
+
+  .expense-item {
+    padding: 15px;
   }
-  
-  .lower {
-    margin-top: 40px;
+
+  button {
     width: 100%;
-    max-width: 800px;
+    padding: 12px;
   }
-  
+}
