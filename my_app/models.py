@@ -18,7 +18,7 @@ class Account(models.Model):
 class Liability(models.Model):
     name = models.CharField(max_length=100)
     amount = models.FloatField(default=0)
-    date = models.DateField(null=False, default= datetime.now().date)
+    date = models.DateField(null=False, default=datetime.now().date())
     long_term = models.BooleanField(default=False)
     interest_rate = models.FloatField(default=0, blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
