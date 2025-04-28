@@ -69,6 +69,7 @@ button {
     flex-grow: 1;
     min-width: 120px;
     text-align: center;
+    font-size: 1.1em;
 }
 
 .register-btn {
@@ -107,6 +108,7 @@ a {
     text-decoration: underline;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
     .home {
         width: 90%;
@@ -119,5 +121,20 @@ a {
 
     button {
         width: 100%;
+        font-size: 1em;
+        padding: 12px;
+    }
+
+    .content-wrapper {
+        padding: 15px;
+        max-width: 350px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .user-greeting {
+        font-size: 1.2em;
     }
 }

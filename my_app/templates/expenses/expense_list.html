@@ -1,5 +1,4 @@
 {% load static %}
-
 <head>
   <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -8,7 +7,6 @@
 
 {% block content %}
 <body>
-
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function () {
@@ -28,89 +26,105 @@
       if (longTermCheckbox.is(':checked')) {
         longTermFields.show();
       }
+
+      $('#expense-form').on('submit', function (event) {
+        event.preventDefault();
+        var formData = $(this).serialize();
+
+        $.ajax({
+          url: '{% url "expenses" %}',  <!-- Ensure your URL pattern is correct -->
+          type: 'POST',
+          data: formData,
+          success: function (response) {
+            if (response.success) {
+              $('#expense-list').append(response.html);  <!-- This is where your expense item HTML will be appended -->
+              Plotly.newPlot('plotly-chart', response.graphData.data, response.graphData.layout);
+              $('#expense-form')[0].reset();
+            }
+          },
+          error: function (xhr, errmsg, err) {
+            alert('Error occurred while adding the expense!');
+          }
+        });
+      });
     });
   </script>
 
-  <div class="main">
-    <div class="img">
-      <img src="{% static 'images/logo.png' %}" alt="Logo">
-    </div>
+  <div class="main-container">
+    <div class="header" style="display: flex; justify-content: center; align-items: center; height: 150px;">
+      <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo" style="width: 150px; height: auto;">
+    </div>   
 
-    <div class="main-1">
-      <div class="graph">
-        <div class="bar-chart">
-          <h2>Monthly Expenses Bar Chart</h2>
-          <div class="plotly-chart" id="plotly-chart"></div>
-        </div>
+    <div class="content-container">
+      
+      <div class="graph-container">
+        <h2>Monthly Expenses Bar Chart</h2>
+        <div class="plotly-chart" id="plotly-chart"></div>
       </div>
 
-      <div class="expense">
+      <div class="expense-list-container">
         <h2>Expense List</h2>
-
-        <div class="expenses">
-          {% for year_month, liabilities in expense_data.items %}
-            <div class="month">
-              <h3>Month: {{ year_month }}</h3>
-              {% for liability in liabilities %}
-                <div class="incomee">
-                  <div class="idhar">
-                    <h2>{{ liability.name }}</h2>
+        <div class="expense-list">
+          <ul id="expense-list">
+            {% for year_month, liabilities in expense_data.items %}
+              <div class="month-section">
+                <h3>Month: {{ year_month }}</h3>
+                {% for liability in liabilities %}
+                  <div class="expense-item">
+                    <h4>{{ liability.name }}</h4>
                     {% if liability.long_term %}
-                      <span class="date">Date From: {{ liability.date }} <br>To: {{ liability.end_date }}</span>
+                      <p>Date From: {{ liability.date }} <br>To: {{ liability.end_date }}</p>
                     {% else %}
-                      <span class="date">Date: {{ liability.date }}</span>
+                      <p>Date: {{ liability.date }}</p>
                     {% endif %}
+                    <p>Amount: ${{ liability.amount }}</p>
                   </div>
-                  <div class="udhar">
-                    <h2>${{ liability.amount }}</h2>
-                  </div>
-                </div>
-                <br>
-              {% endfor %}
-            </div>
-          {% endfor %}
+                  <br>
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </ul>
         </div>
       </div>
     </div>
 
-    <div class="lower">
-      <div class="income">
-        <h2>Add Long Term Liability or Daily Expense</h2>
-        <form method="post">
-          {% csrf_token %}
-          <div class="form-group">
-            {{ form.long_term.label_tag }}
-            {{ form.long_term }}
-          </div>
-          <br>
-          <div class="form-group">
-            {{ form.name.label_tag }}
-            {{ form.name }}
-          </div>
-          <div class="form-group">
-            {{ form.amount.label_tag }}
-            {{ form.amount }}
-          </div>
-          <br>
-          <div class="form-group">
-            {{ form.date.label_tag }}
-            {{ form.date }}
-          </div>
-          <br>
+    <div class="form-container">
+      <h2>Add Long Term Liability or Daily Expense</h2>
+      <form id="expense-form" method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+          {{ form.long_term.label_tag }}
+          {{ form.long_term }}
+        </div>
 
-          <div id="end_date" class="form-group">
-            {{ form.end_date.label_tag }}
-            {{ form.end_date }}
-          </div>
-          <br>
-          <div id="interest_rate" class="form-group">
-            {{ form.interest_rate.label_tag }}
-            {{ form.interest_rate }}
-          </div>
-          <br>
-          <button type="submit" class="btn btn-success">Add Liability</button>
-        </form>
-      </div>
+        <div class="form-group">
+          {{ form.name.label_tag }}
+          {{ form.name }}
+        </div>
+
+        <div class="form-group">
+          {{ form.amount.label_tag }}
+          {{ form.amount }}
+        </div>
+
+        <div class="form-group">
+          {{ form.date.label_tag }}
+          {{ form.date }}
+        </div>
+
+        <div id="end_date" class="form-group">
+          {{ form.end_date.label_tag }}
+          {{ form.end_date }}
+        </div>
+
+        <div id="interest_rate" class="form-group">
+          {{ form.interest_rate.label_tag }}
+          {{ form.interest_rate }}
+        </div>
+
+        <button type="submit" class="btn btn-success">Add Liability</button>
+      </form>
     </div>
   </div>
 
@@ -118,6 +132,5 @@
     var graphData = {{ graph_data|safe }};
     Plotly.newPlot('plotly-chart', graphData.data, graphData.layout);
   </script>
-
 </body>
 {% endblock %}
