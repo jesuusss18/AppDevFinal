@@ -1,6 +1,7 @@
 {% load static %}
 <html>
 <head>
+    <!-- Link to external CSS file for registration page styling -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/login_styles.css' %}">
 </head>
 <body>
@@ -12,6 +13,7 @@
                 <div class="form">
                     <h2 style="text-align: center;">Sign Up</h2>
 
+                    <!-- Display error messages if form errors exist -->
                     {% if form.errors %}
                         <div class="error-messages">
                             <ul>
@@ -27,19 +29,26 @@
                         </div>
                     {% endif %}
 
+                    <!-- Username field -->
                     {{ form.username.label_tag }}
                     <br>
                     {{ form.username }}
                     <br>
+
+                    <!-- Password field (first input) -->
                     {{ form.password1.label_tag }}
                     <br>
                     {{ form.password1 }}
                     <br>
+
+                    <!-- Password field (confirmation input) -->
                     {{ form.password2.label_tag }}
                     <br>
                     {{ form.password2 }}
                 </div>
                 <br>
+
+                <!-- Submit button -->
                 <div class="button-container">
                     <button class="btn btn-primary" type="submit">Register</button>
                 </div>
