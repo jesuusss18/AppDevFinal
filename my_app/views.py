@@ -151,3 +151,4 @@ class ExpenseListView(FormView):
         context['graph_data'] = mark_safe(graph_data['chart']) 
 
         return context
+
