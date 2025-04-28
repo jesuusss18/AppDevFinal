@@ -21,11 +21,7 @@ import plotly.express as px
 from plotly.graph_objs import *
 
 def home(request):
-    user = request.user    
-    if user.is_authenticated:
-        return redirect('expenses')
-    else:
-        return render(request, 'fin_manager/home.html')
+        return render(request, 'home/home.html')
 
 
 def register(request):
@@ -60,7 +56,7 @@ def generate_graph(data):
 class ExpenseListView(FormView):
     template_name = 'expenses/expense_list.html'
     form_class = LiabilityForm
-    success_url = '/'  # Update this with the correct URL
+    success_url = '/'  
 
     def form_valid(self, form):
         account, _ = Account.objects.get_or_create(user=self.request.user)
@@ -102,7 +98,6 @@ class ExpenseListView(FormView):
                             'end_date': liability.end_date,
                         })
 
-                        # Move to the next month
                         current_date = current_date + relativedelta(months=1)
                 else:
                     year_month = liability.date.strftime('%Y-%m')
@@ -132,7 +127,6 @@ class ExpenseListView(FormView):
                         'long_term': liability.long_term,
                     })
 
-                        # Move to the next month
                     current_date = current_date + relativedelta(months=1)
                 else:
                     year_month = liability.date.strftime('%Y-%m')
@@ -144,18 +138,16 @@ class ExpenseListView(FormView):
                         'amount': liability.amount,
                         'date': liability.date,
                     })              
-        # Convert the expense_data_graph into aggregated_data
         aggregated_data = [{'year_month': key, 'expenses': sum(item['amount'] for item in value)} for key, value in expense_data_graph.items()]
 
         context['expense_data'] = expense_data
         context['aggregated_data'] = aggregated_data
 
-        # Prepare graph_data for generating the Plotly graph
         graph_data = {
             'months': [item['year_month'] for item in aggregated_data],
             'expenses': [item['expenses'] for item in aggregated_data]
         }
         graph_data['chart'] = generate_graph(graph_data)
-        context['graph_data'] = mark_safe(graph_data['chart'])  # Use mark_safe to render the JSON as HTML
+        context['graph_data'] = mark_safe(graph_data['chart']) 
 
         return context

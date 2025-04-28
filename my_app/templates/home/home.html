@@ -2,27 +2,30 @@
 
 <html>
     <head>
-        <title> Home</title>
+        <title>Home</title>
         <link rel="stylesheet" href="{% static 'css/home.css' %}">
     </head>
     <body>
-        {% block content%}
-        <div>
-            {% if user.is_authenticated%}
-            <h2>Welcome,{{ user.username }}</h2>
-            <a href="{% url 'expenses' %}"> Open Expenses</a>
+        {% block content %}
+        <div class="content-wrapper">
+            {% if user.is_authenticated %}
+                <h2 class="user-greeting">Welcome, {{ user.username }}</h2>
+                <a href="{% url 'expenses' %}" class="expenses-link">Open Expenses</a>
             {% else %}
-            <div class="home">
-                <h2>Welcome!</h2>
-                <div class="reg">
-                    <h2><a href="{% url 'register' %}"> Register</a></h2>
+                <div class="home">
+                    <h2>Welcome!</h2>
+                    <div class="buttons">
+                        <a href="{% url 'register' %}">
+                            <button class="register-btn">Register</button>
+                        </a>
+                        <a href="{% url 'login' %}">
+                            <button class="login-btn">Login</button>
+                        </a>
+                    </div>
                 </div>
-                <div class="log">
-                    <h2><a href="{% url 'login' %}"> Login</a></h2>
-                </div>
-            </div>
             {% endif %}
         </div>
         {% endblock %}
     </body>
 </html>
+

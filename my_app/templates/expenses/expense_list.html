@@ -15,10 +15,8 @@
       var longTermCheckbox = $('#id_long_term');
       var longTermFields = $('#interest_rate, #end_date');
 
-      // Initially hide the long_term fields
       longTermFields.hide();
 
-      // Toggle the long_term fields based on checkbox selection
       longTermCheckbox.on('change', function () {
         if (longTermCheckbox.is(':checked')) {
           longTermFields.show();
@@ -27,7 +25,6 @@
         }
       });
 
-      // Handle the initial state if data is already present
       if (longTermCheckbox.is(':checked')) {
         longTermFields.show();
       }
@@ -101,7 +98,6 @@
           </div>
           <br>
 
-          <!-- Display long_term checkbox -->
           <div id="end_date" class="form-group">
             {{ form.end_date.label_tag }}
             {{ form.end_date }}
@@ -119,7 +115,6 @@
   </div>
 
   <script>
-    // Initialize the Plotly chart
     var graphData = {{ graph_data|safe }};
     Plotly.newPlot('plotly-chart', graphData.data, graphData.layout);
   </script>
