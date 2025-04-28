@@ -1,46 +1,34 @@
 {% load static %}
-<head>
-    <!-- Link to external CSS file for login page styling -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/login_styles.css'  %}">
-</head>
 
-{% block content %}
-
-    <!-- Display error message if there are form errors -->
-    {% if form.errors %}
-        <p>The Username and/or Password are not right. Please, try again.</p>
-    {% endif %}
-
-    <!-- Login form -->
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        <div class="container">
-            <div class="form-container">
-                <div class="form">
-                    <h2 style="text-align: center;">Sign In</h2>
-
-                    <!-- Username field -->
-                    {{ form.username.label_tag }}
-                    <br>
-                    {{ form.username }}
-                    <br><br>
-
-                    <!-- Password field -->
-                    {{ form.password.label_tag }}
-                    <br>
-                    {{ form.password }}
+<html>
+    <head>
+        <title>Home</title>
+        <!-- Link to external CSS file for home page styling -->
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    </head>
+    <body>
+        {% block content %}
+        <div class="content-wrapper">
+            {% if user.is_authenticated %}
+                <!-- Display a personalized greeting and link to expenses page if the user is authenticated -->
+                <h2 class="user-greeting">Welcome, {{ user.username }}</h2>
+                <a href="{% url 'expenses' %}" class="expenses-link">Open Expenses</a>
+            {% else %}
+                <!-- Show welcome message and options to register or login if the user is not authenticated -->
+                <div class="home">
+                    <h2>Welcome!</h2>
+                    <div class="buttons">
+                        <a href="{% url 'register' %}">
+                            <button class="register-btn">Register</button>
+                        </a>
+                        <a href="{% url 'login' %}">
+                            <button class="login-btn">Login</button>
+                        </a>
+                    </div>
                 </div>
-                <br>
-
-                <!-- Submit button -->
-                <div class="button-container">
-                    <button class="btn btn-primary" type="submit">
-                        Login
-                    </button>
-                </div>
-            </div>
+            {% endif %}
         </div>
-    </form>
-
-{% endblock %}
+        {% endblock %}
+    </body>
+</html>
 
